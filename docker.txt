@@ -1,0 +1,19 @@
+docker run -d --name=portainer -p 8000:8000 -p 9443:9443 --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /home/ubuntu/portainer:/data portainer/portainer
+
+docker run -d --name=portainer -p 8000:8000 -p 9443:9443 --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /home/ubuntu/portainer:/data portainer/portainer-ce-latest
+
+sudo docker exec -it git/bin/bash
+sudo docker exec -it git editor /etc/gitlab/gitlab.rb
+docker exec -it gitlab nano /etc/gitlab/gitlab.rb--> external_url 'http://51.91.221.193/git/'
+sudo docker exec -it gitlab gitlab-ctl reconfigure```
+
+
+sudo docker run --detach \
+  --hostname gitlab \
+  --publish 19443:443 --publish 19080:80 --publish 2022:22 \
+  --name gitlab \
+  --restart always \
+  --volume /home/ubuntu/gitlab/config:/etc/gitlab \
+  --volume /home/ubuntu/gitlab/logs:/var/log/gitlab \
+  --volume /home/ubuntu/gitlab/data:/var/opt/gitlab \
+  gitlab/gitlab-ce:12.10.12-ce.0
